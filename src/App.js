@@ -4,7 +4,7 @@ import ExcelReader from "./components/ExcelReader";
 function App() {
   return (
     <div className="App">
-      <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="w-full h-full bg-gradient-to-b from-sky-100 to-sky-300">
         <ExcelReader />
       </div>
     </div>
