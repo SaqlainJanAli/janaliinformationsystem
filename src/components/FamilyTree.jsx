@@ -2,13 +2,28 @@ import React from "react";
 import { Tree } from "react-d3-tree";
 
 const convertToTreeData = (data) => {
+  let formattedDate = "";
+  if (data?.data !== undefined) {
+    const millisecondsSinceEpoch = (data?.DOB - 25569) * 86400 * 1000;
+
+    // Create a Date object from milliseconds since Unix epoch
+    const date = new Date(millisecondsSinceEpoch);
+
+    // Format the date as "MMM DD, YYYY"
+    formattedDate = date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    });
+  }
+
   let result = {
     name: data?.Name,
     attributes: {
       Gender: data?.Gender,
       "Father Name": data?.FatherName,
       "Mother Name": data?.MotherName,
-      DOB: data?.DOB,
+      DOB: formattedDate,
     },
     children: data?.Children ? data?.Children.map(convertToTreeData) : null,
   };
@@ -21,6 +36,7 @@ const NodeComponent = ({ nodeData }) => (
     <p>Father: {nodeData.attributes.FatherName}</p>
     <p>Mother: {nodeData.attributes.MotherName}</p>
     <p>Gender: {nodeData.attributes.Gender}</p>
+    <p>DOB: {nodeData.attributes.DOB}</p>
   </div>
 );
 

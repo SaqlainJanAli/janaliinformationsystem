@@ -1,4 +1,4 @@
-const familyInfoJson = [
+const JanAliJsonDatabase = [
   {
     Id: 1,
     ParentId: 0,
@@ -729,4 +729,4 @@ const familyInfoJson = [
   },
 ];
 
-export default familyInfoJson;
+export default JanAliJsonDatabase;
