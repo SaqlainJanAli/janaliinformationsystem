@@ -9,6 +9,22 @@ function ConvertToTreeStructure(nodes, parentId = 0) {
   const tree = [];
 
   for (const node of nodes) {
+    let formattedDate = "";
+
+    if (node?.DOB !== undefined) {
+      const millisecondsSinceEpoch = (node?.DOB - 25569) * 86400 * 1000;
+
+      // Create a Date object from milliseconds since Unix epoch
+      const date = new Date(millisecondsSinceEpoch);
+      const options = {
+        weekday: "long",
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      };
+      formattedDate = date.toLocaleDateString("en-US", options);
+    }
+
     if (node.ParentId === parentId) {
       const newNode = {
         Id: node.Id,
@@ -16,7 +32,7 @@ function ConvertToTreeStructure(nodes, parentId = 0) {
         FatherName: node.FatherName,
         MotherName: node.MotherName,
         Gender: node.Gender,
-        DOB: node.DOB,
+        DOB: formattedDate,
         Children: ConvertToTreeStructure(nodes, node.Id),
       };
       tree.push(newNode);
@@ -59,10 +75,10 @@ const ExcelReader = () => {
   };
 
   const handleClick = () => {
-    if (loadedJson === false) {
-      fetchExcelData();
-      setLoadedJson(true);
-    }
+    // if (loadedJson === false) {
+    fetchExcelData();
+    setLoadedJson(!loadedJson);
+    // }
   };
   const toggleViewType = () => {
     let newViewType = viewType === "vertical" ? "horizontal" : "vertical";
