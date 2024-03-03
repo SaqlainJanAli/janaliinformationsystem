@@ -1,7 +1,7 @@
 import React from "react";
 import { Tree as D3Tree } from "react-d3-tree";
-import malepng from "../resources/data/image/malepng.png";
-import femalepng from "../resources/data/image/femalepng.png";
+import MaleImage from "../resources/data/image/malepng.png";
+import FemaleImage from "../resources/data/image/femalepng.png";
 import treeStyle from "../css/tree.module.scss";
 
 const convertToTreeData = (data) => {
@@ -9,8 +9,8 @@ const convertToTreeData = (data) => {
     name: data?.Name,
     attributes: {
       Gender: data?.Gender,
-      "Father Name": data?.FatherName,
-      "Mother Name": data?.MotherName,
+      FatherName: data?.FatherName,
+      MotherName: data?.MotherName,
       DOB: data?.DOB,
       Age: data?.Age,
     },
@@ -18,111 +18,130 @@ const convertToTreeData = (data) => {
   };
   return result;
 };
-const NodeComponent = ({ nodeData }) => (
-  <div className="bg-green-300">
-    <h2>{nodeData.name}</h2>
-    <div className="black">ID: {nodeData.attributes.Id}</div>
-    <div className="black">Father: {nodeData.attributes.FatherName}</div>
-    <div className="black">Mother: {nodeData.attributes.MotherName}</div>
-    <div className="black">Gender: {nodeData.attributes.Gender}</div>
-    <div className="black">DOB: {nodeData.attributes.DOB}</div>
-    <div className="black">Age: {nodeData.attributes.Age}</div>
-  </div>
-);
 
-function CustomLabelComponent({ nodeData }) {
-  const backgroundColor =
-    nodeData.attributes.Gender === "Male" ? "#4682B4" : "#FF69B4";
+function CustomLabelComponent({ nodeDatum, foreignObjectProps }) {
+  // const backgroundColor =
+  //   nodeDatum.attributes.Gender === "Male" ? "#4682B4" : "#FF69B4";
   const textColor = "#FFFFFF"; // White text color
 
   // Conditional styles for specific attributes
-  const fatherNameColor =
-    nodeData.attributes.Gender === "Male" ? "#FFFFFF" : "#000000"; // White for males, black for females
-  const motherNameColor =
-    nodeData.attributes.Gender === "Male" ? "#FFFFFF" : "#000000"; // White for males, black for females
-  const genderColor = "#FFFFFF"; // White text color for gender
+  const nameColor =
+    nodeDatum.attributes.Gender === "Male" ? "darkgreen" : "brown";
+  const gradientLeftColor =
+    nodeDatum.attributes.Gender === "Male" ? "lightcyan" : "red";
+  const gradientRightColor =
+    nodeDatum.attributes.Gender === "Male" ? "white" : "white";
 
-  // Define custom colors for males and females
-  // const backgroundColor =
-  //   nodeData.attributes.Gender === "Male" ? "#4682B4" : "#FF69B4";
-  // const textColor = "#000"; // White text color
+  const genderColor = "#FFFFFF"; // White text color for gender
 
   return (
     <>
-      <div
-        className={`rd3t-label__attributes`}
-        style={{
-          backgroundColor,
-          color: textColor,
-          padding: "8px",
-          borderRadius: "5px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center" }}>
-          {nodeData.attributes.Gender === "Male" ? (
-            <img
-              src={malepng}
-              alt="male pic"
-              size={20}
-              style={{ marginRight: "5px" }}
-            />
+      <svg width="600" height="600" stroke="black" strokeWidth={1}>
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="20%" stopColor={gradientLeftColor} />
+            <stop offset="80%" stopColor={gradientRightColor} />
+          </linearGradient>
+        </defs>
+        <rect
+          width="300"
+          height="300"
+          fill={"url(#gradient)"}
+          x="0"
+          y="2"
+          rx="10"
+          ry="10"
+        />
+        <circle cx="0" cy="0" r="20" fill="green" stroke="none" />
+        {/* <polygon points="100,50 150,150 50,150" fill="blue" /> */}
+
+        <g transform="translate(20, 8)" x="20" y="20">
+          {nodeDatum.attributes.Gender === "Male" ? (
+            <image href={MaleImage} alt="Male pic" width="80" height="80" />
           ) : (
-            <img
-              src={femalepng}
-              alt="female pic"
-              size={20}
-              style={{ marginRight: "5px" }}
-            />
+            <image href={FemaleImage} alt="Female pic" width="80" height="80" />
           )}
-          <div>{nodeData.name}</div>
-        </div>
-        <p style={{ color: fatherNameColor }}>
-          Father: {nodeData.attributes.FatherName}
-        </p>
-        <p style={{ color: motherNameColor }}>
-          Mother: {nodeData.attributes.MotherName}
-        </p>
-        <p style={{ color: genderColor }}>
-          Gender: {nodeData.attributes.Gender}
-        </p>
-        <p className="black">DOB: {nodeData.attributes.DOB}</p>{" "}
-        <p className="black">Age: {nodeData.attributes.Age}</p>{" "}
-      </div>
+        </g>
+        <br />
+        <text
+          x="110"
+          y="80"
+          fill={nameColor}
+          fontStyle={"italic"}
+          fontWeight={"bold"}
+          fontFamily="cursive"
+          fontSize={"20"}
+          stroke="none"
+        >
+          {`${nodeDatum.name}`}{" "}
+        </text>
+        <text
+          x="20"
+          y="120"
+          fill={"black"}
+          stroke="none"
+          fontFamily="cursive"
+          // fontSize="40"
+        >{`Father: ${nodeDatum.attributes.FatherName}`}</text>
+        <text
+          x="20"
+          y="160"
+          stroke="none"
+          fontFamily="cursive"
+          fill={"black"}
+        >{`Mother: ${nodeDatum.attributes.MotherName}`}</text>
+        <text
+          x="20"
+          y="200"
+          stroke="none"
+          fontFamily="cursive"
+          fill={"black"}
+        >{`Gender: ${nodeDatum.attributes.Gender}`}</text>
+        <text
+          x="20"
+          y="240"
+          stroke="none"
+          fontFamily="cursive"
+          fill="black"
+        >{`DOB: ${nodeDatum.attributes.DOB}`}</text>
+        <text
+          x="20"
+          y="280"
+          fill="black"
+          stroke="none"
+          fontFamily="cursive"
+        >{`Age: ${nodeDatum.attributes.Age}`}</text>
+      </svg>
     </>
   );
 }
 const pathFunction = () => {
   // return <path fill="#FFFFFF" stroke="black" strokewidth="2px" />;
 };
-const FamilyTree = (data, viewType) => {
-  const treeData = convertToTreeData(data.data[0]);
+const FamilyTree = (props) => {
+  const treeData = convertToTreeData(props.data[0]);
+  let viewType = "vertical"; //"props.viewType";
+  // let xNodesize = viewType === "horizontal" ? "900" : "400";
+  // let yNodesize = viewType === "horizontal" ? "900" : "400";
   let noTreeData = treeData.name === null || treeData.name === undefined;
   console.log("treeData Final: ", treeData);
   return (
     noTreeData === false && (
-      <div style={{ width: "100%", height: "2000px" }}>
+      <div style={{ width: "100%", height: "80vh" }}>
         <D3Tree
           collapsible={false}
           // className={}
-          key={"Id"}
+          // key={"Id"}
           data={treeData}
-          orientation="vertical"
+          orientation={viewType}
           translate={{ x: 50, y: 50 }}
-          // nodeSvgShape={{ shape: "circle", shapeProps: { r: 10 } }}
-          nodeLabelComponent={{
-            render: <CustomLabelComponent />,
-            foreignObjectWrapper: {
-              width: 150,
-              height: 30,
-              x: -75,
-              y: -15,
-            },
-          }}
-          nodeSize={{ x: 100, y: 500 }} // Adjust the node size for better spacing
-          separation={{ siblings: 3, nonSiblings: 3 }} // Adjust the separation between nodes
+          renderCustomNodeElement={(rd3tProps) =>
+            CustomLabelComponent({ ...rd3tProps })
+          }
+          nodeSize={{ x: 100, y: 900 }} // Adjust the node size for better spacing
+          separation={{ siblings: 4, nonSiblings: 4 }} // Adjust the separation between nodes
           allowForeignObjects={true} // Enable the use of foreignObjects for custom label rendering
           pathFunc="diagonal" // Specify the path function for connecting nodes
-          branchNodeClassName="bg-blue-400"
         />
       </div>
     )
