@@ -12,6 +12,7 @@ const convertToTreeData = (data) => {
       "Father Name": data?.FatherName,
       "Mother Name": data?.MotherName,
       DOB: data?.DOB,
+      Age: data?.Age,
     },
     children: data?.Children ? data?.Children.map(convertToTreeData) : null,
   };
@@ -25,6 +26,7 @@ const NodeComponent = ({ nodeData }) => (
     <div className="black">Mother: {nodeData.attributes.MotherName}</div>
     <div className="black">Gender: {nodeData.attributes.Gender}</div>
     <div className="black">DOB: {nodeData.attributes.DOB}</div>
+    <div className="black">Age: {nodeData.attributes.Age}</div>
   </div>
 );
 
@@ -84,6 +86,7 @@ function CustomLabelComponent({ nodeData }) {
           Gender: {nodeData.attributes.Gender}
         </p>
         <p className="black">DOB: {nodeData.attributes.DOB}</p>{" "}
+        <p className="black">Age: {nodeData.attributes.Age}</p>{" "}
       </div>
     </>
   );

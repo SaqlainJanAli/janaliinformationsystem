@@ -33,6 +33,7 @@ function ConvertToTreeStructure(nodes, parentId = 0) {
         MotherName: node.MotherName,
         Gender: node.Gender,
         DOB: formattedDate,
+        Age: node.Age,
         Children: ConvertToTreeStructure(nodes, node.Id),
       };
       tree.push(newNode);
@@ -60,7 +61,8 @@ const ExcelReader = () => {
       const data = await response.arrayBuffer();
 
       const workbook = XLSX.read(data);
-      const sheetName = workbook.SheetNames[0];
+      // const sheetnames = workbook.SheetNames;
+      const sheetName = workbook.SheetNames[1];
       const worksheet = workbook.Sheets[sheetName];
       const treeData = XLSX.utils.sheet_to_json(worksheet);
       // const treeData = familyInfoJson;
