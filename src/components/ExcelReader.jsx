@@ -108,7 +108,7 @@ const ExcelReader = () => {
         <br />
       </div>
       <div
-        className="h-screen m-3 w-full h-full bg-gradient-to-l from-cyan-200 to-white-200"
+        className="h-screen mt-3 w-full h-full bg-gradient-to-l from-cyan-200 to-white-200"
         style={{ border: "1px solid black", borderRadius: "2%" }}
       >
         {console.log("Before calling tree json", treeData)}
