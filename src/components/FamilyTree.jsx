@@ -20,19 +20,19 @@ const convertToTreeData = (data) => {
 
 function CustomLabelComponent({ nodeDatum, foreignObjectProps }) {
   const nameColor =
-    nodeDatum.attributes.Gender === "Male" ? "darkgreen" : "white";
-  const gradientLeftColor =
-    nodeDatum.attributes.Gender === "Male" ? "lightcyan" : "white";
-  const gradientRightColor =
-    nodeDatum.attributes.Gender === "Male" ? "white" : "white";
+    nodeDatum.attributes.Gender === "Male" ? "darkgreen" : "red";
+  // const gradientLeftColor =
+  //   nodeDatum.attributes.Gender === "Male" ? "lightcyan" : "white";
+  // const gradientRightColor =
+  //   nodeDatum.attributes.Gender === "Male" ? "white" : "white";
 
   return (
     <>
       <svg width="600" height="600" stroke="black" strokeWidth={1}>
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="20%" stopColor={gradientLeftColor} />
-            <stop offset="80%" stopColor={gradientRightColor} />
+            <stop offset="20%" stopColor={"cyan"} />
+            <stop offset="80%" stopColor={"white"} />
           </linearGradient>
         </defs>
         <rect
