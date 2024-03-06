@@ -2,7 +2,6 @@ import React from "react";
 import { Tree as D3Tree } from "react-d3-tree";
 import MaleImage from "../resources/data/image/malepng.png";
 import FemaleImage from "../resources/data/image/femalepng.png";
-import treeStyle from "../css/tree.module.scss";
 
 const convertToTreeData = (data) => {
   let result = {
@@ -20,19 +19,12 @@ const convertToTreeData = (data) => {
 };
 
 function CustomLabelComponent({ nodeDatum, foreignObjectProps }) {
-  // const backgroundColor =
-  //   nodeDatum.attributes.Gender === "Male" ? "#4682B4" : "#FF69B4";
-  const textColor = "#FFFFFF"; // White text color
-
-  // Conditional styles for specific attributes
   const nameColor =
-    nodeDatum.attributes.Gender === "Male" ? "darkgreen" : "brown";
+    nodeDatum.attributes.Gender === "Male" ? "darkgreen" : "white";
   const gradientLeftColor =
-    nodeDatum.attributes.Gender === "Male" ? "lightcyan" : "red";
+    nodeDatum.attributes.Gender === "Male" ? "lightcyan" : "white";
   const gradientRightColor =
     nodeDatum.attributes.Gender === "Male" ? "white" : "white";
-
-  const genderColor = "#FFFFFF"; // White text color for gender
 
   return (
     <>
@@ -115,9 +107,6 @@ function CustomLabelComponent({ nodeDatum, foreignObjectProps }) {
     </>
   );
 }
-const pathFunction = () => {
-  // return <path fill="#FFFFFF" stroke="black" strokewidth="2px" />;
-};
 const FamilyTree = (props) => {
   const treeData = convertToTreeData(props.data[0]);
   let viewType = "vertical"; //"props.viewType";
@@ -127,11 +116,9 @@ const FamilyTree = (props) => {
   console.log("treeData Final: ", treeData);
   return (
     noTreeData === false && (
-      <div style={{ width: "100%", height: "80vh" }}>
+      <div style={{ width: "100%", height: "100vh" }}>
         <D3Tree
           collapsible={false}
-          // className={}
-          // key={"Id"}
           data={treeData}
           orientation={viewType}
           translate={{ x: 50, y: 50 }}

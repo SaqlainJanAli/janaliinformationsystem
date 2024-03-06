@@ -1,8 +1,6 @@
-// ExcelReader.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import FamilyTree from "./FamilyTree";
-import familyInfoJson from "../resources/data/JanAliJsonDatabase";
 
 //function that will convert json to hirarecheal structure
 function ConvertToTreeStructure(nodes, parentId = 0) {
@@ -50,9 +48,6 @@ const ExcelReader = () => {
 
   const fetchExcelData = async () => {
     try {
-      console.log("inside fetch excel data");
-      // let filepath = "resources/data/JanAliFamilyDatabase.xlsx";
-      // const response = await fetch(filepath);
       const response = await fetch(
         "resources/data/JanAliFamilyDatabase.xlsx?timestamp=" +
           new Date().getTime()
@@ -61,16 +56,14 @@ const ExcelReader = () => {
       const data = await response.arrayBuffer();
 
       const workbook = XLSX.read(data);
-      // const sheetnames = workbook.SheetNames;
       const sheetName = workbook.SheetNames[1];
       const worksheet = workbook.Sheets[sheetName];
       const treeData = XLSX.utils.sheet_to_json(worksheet);
-      // const treeData = familyInfoJson;
 
       const treeNodes = ConvertToTreeStructure(treeData);
       setTreeData(treeNodes);
-      console.log("Tree Nodes after building");
-      console.log(treeNodes);
+      // console.log("Tree Nodes after building");
+      // console.log(treeNodes);
     } catch (error) {
       console.error("Error fetching or parsing Excel file:", error);
     }
@@ -111,7 +104,6 @@ const ExcelReader = () => {
         className="h-screen mt-3 w-full h-full bg-gradient-to-l from-cyan-200 to-white-200"
         style={{ border: "1px solid black", borderRadius: "2%" }}
       >
-        {console.log("Before calling tree json", treeData)}
         {treeData && <FamilyTree data={treeData} viewType={viewType} />}
       </div>
     </div>
