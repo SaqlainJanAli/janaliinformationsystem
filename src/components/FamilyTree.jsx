@@ -21,10 +21,6 @@ const convertToTreeData = (data) => {
 function CustomLabelComponent({ nodeDatum, foreignObjectProps }) {
   const nameColor =
     nodeDatum.attributes.Gender === "Male" ? "darkgreen" : "red";
-  // const gradientLeftColor =
-  //   nodeDatum.attributes.Gender === "Male" ? "lightcyan" : "white";
-  // const gradientRightColor =
-  //   nodeDatum.attributes.Gender === "Male" ? "white" : "white";
 
   return (
     <>
