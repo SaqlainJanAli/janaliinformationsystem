@@ -18,91 +18,183 @@ const convertToTreeData = (data) => {
   return result;
 };
 
+//function CustomLabelComponent({ nodeDatum, foreignObjectProps }) {
+//  const nameColor =
+//    nodeDatum.attributes.Gender === "Male" ? "darkgreen" : "red";
+
+//  return (
+//    <>
+//      <svg width="600" height="600" stroke="black" strokeWidth={1}>
+//        <defs>
+//          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+//            <stop offset="20%" stopColor={"cyan"} />
+//            <stop offset="80%" stopColor={"white"} />
+//          </linearGradient>
+//        </defs>
+//        <rect
+//          width="300"
+//          height="300"
+//          fill={"url(#gradient)"}
+//          x="0"
+//          y="2"
+//          rx="10"
+//          ry="10"
+//        />
+//        <circle cx="0" cy="0" r="20" fill="green" stroke="none" />
+//        {/* <polygon points="100,50 150,150 50,150" fill="blue" /> */}
+
+//        <g transform="translate(20, 8)" x="20" y="20">
+//          {nodeDatum.attributes.Gender === "Male" ? (
+//            <image href={MaleImage} alt="Male pic" width="80" height="80" />
+//          ) : (
+//            <image href={FemaleImage} alt="Female pic" width="80" height="80" />
+//          )}
+//        </g>
+//        <br />
+//        <text
+//          x="110"
+//          y="80"
+//          fill={nameColor}
+//          /*fontStyle={"italic"}*/
+//          fontWeight={"bold"}
+//          fontFamily="cursive"
+//          fontSize={"20"}
+//          stroke="none"
+//        >
+//          {`${nodeDatum.name}`}{" "}
+//        </text>
+//        <text
+//          x="20"
+//          y="120"
+//          fill={"black"}
+//          stroke="none"
+//          fontFamily="cursive"
+//          // fontSize="40"
+//        >{`Father: ${nodeDatum.attributes.FatherName}`}</text>
+//        <text
+//          x="20"
+//          y="160"
+//          stroke="none"
+//          fontFamily="cursive"
+//          fill={"black"}
+//        >{`Mother: ${nodeDatum.attributes.MotherName}`}</text>
+//        <text
+//          x="20"
+//          y="200"
+//          stroke="none"
+//          fontFamily="cursive"
+//          fill={"black"}
+//        >{`Gender: ${nodeDatum.attributes.Gender}`}</text>
+//        <text
+//          x="20"
+//          y="240"
+//          stroke="none"
+//          fontFamily="cursive"
+//          fill="black"
+//        >{`DOB: ${nodeDatum.attributes.DOB}`}</text>
+//        <text
+//          x="20"
+//          y="280"
+//          fill="black"
+//          stroke="none"
+//          fontFamily="cursive"
+//        >{`Age: ${nodeDatum.attributes.Age}`}</text>
+//      </svg>
+//    </>
+//  );
+//}
+
 function CustomLabelComponent({ nodeDatum, foreignObjectProps }) {
-  const nameColor =
-    nodeDatum.attributes.Gender === "Male" ? "darkgreen" : "red";
+    const nameColor =
+        nodeDatum.attributes.Gender === "Male" ? "darkgreen" : "red";
 
-  return (
-    <>
-      <svg width="600" height="600" stroke="black" strokeWidth={1}>
-        <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="20%" stopColor={"cyan"} />
-            <stop offset="80%" stopColor={"white"} />
-          </linearGradient>
-        </defs>
-        <rect
-          width="300"
-          height="300"
-          fill={"url(#gradient)"}
-          x="0"
-          y="2"
-          rx="10"
-          ry="10"
-        />
-        <circle cx="0" cy="0" r="20" fill="green" stroke="none" />
-        {/* <polygon points="100,50 150,150 50,150" fill="blue" /> */}
+    return (
+        <svg width="600" height="600" stroke="black" strokeWidth={1}>
+            <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="20%" stopColor={"cyan"} />
+                    <stop offset="80%" stopColor={"white"} />
+                </linearGradient>
+            </defs>
+            <rect
+                width="300"
+                height="300"
+                fill={"url(#gradient)"}
+                x="0"
+                y="2"
+                rx="10"
+                ry="10"
+            />
+            <circle cx="0" cy="0" r="20" fill="green" stroke="none" />
 
-        <g transform="translate(20, 8)" x="20" y="20">
-          {nodeDatum.attributes.Gender === "Male" ? (
-            <image href={MaleImage} alt="Male pic" width="80" height="80" />
-          ) : (
-            <image href={FemaleImage} alt="Female pic" width="80" height="80" />
-          )}
-        </g>
-        <br />
-        <text
-          x="110"
-          y="80"
-          fill={nameColor}
-          fontStyle={"italic"}
-          fontWeight={"bold"}
-          fontFamily="cursive"
-          fontSize={"20"}
-          stroke="none"
-        >
-          {`${nodeDatum.name}`}{" "}
-        </text>
-        <text
-          x="20"
-          y="120"
-          fill={"black"}
-          stroke="none"
-          fontFamily="cursive"
-          // fontSize="40"
-        >{`Father: ${nodeDatum.attributes.FatherName}`}</text>
-        <text
-          x="20"
-          y="160"
-          stroke="none"
-          fontFamily="cursive"
-          fill={"black"}
-        >{`Mother: ${nodeDatum.attributes.MotherName}`}</text>
-        <text
-          x="20"
-          y="200"
-          stroke="none"
-          fontFamily="cursive"
-          fill={"black"}
-        >{`Gender: ${nodeDatum.attributes.Gender}`}</text>
-        <text
-          x="20"
-          y="240"
-          stroke="none"
-          fontFamily="cursive"
-          fill="black"
-        >{`DOB: ${nodeDatum.attributes.DOB}`}</text>
-        <text
-          x="20"
-          y="280"
-          fill="black"
-          stroke="none"
-          fontFamily="cursive"
-        >{`Age: ${nodeDatum.attributes.Age}`}</text>
-      </svg>
-    </>
-  );
+            <g transform="translate(20, 8)" x="20" y="20">
+                {nodeDatum.attributes.Gender === "Male" ? (
+                    <image href={MaleImage} alt="Male pic" width="80" height="80" />
+                ) : (
+                    <image href={FemaleImage} alt="Female pic" width="80" height="80" />
+                )}
+            </g>
+            <br />
+            <text
+                x="110"
+                y="80"
+                fill={nameColor}
+                fontWeight={"bold"}
+                fontFamily="'Jameel Noori Nastaleeq', cursive" // Use Urdu Nastaleeq font
+                fontSize={"20"}
+                stroke="none"
+            >
+                {`${nodeDatum.name}`}{" "}
+            </text>
+            <text
+                x="20"
+                y="120"
+                fill={"black"}
+                stroke="none"
+                fontFamily="'Jameel Noori Nastaleeq', cursive"
+            >
+                {`Father: ${nodeDatum.attributes.FatherName}`}
+            </text>
+            <text
+                x="20"
+                y="160"
+                stroke="none"
+                fontFamily="'Jameel Noori Nastaleeq', cursive"
+                fill={"black"}
+            >
+                {`Mother: ${nodeDatum.attributes.MotherName}`}
+            </text>
+            <text
+                x="20"
+                y="200"
+                stroke="none"
+                fontFamily="'Jameel Noori Nastaleeq', cursive"
+                fill={"black"}
+            >
+                {`Gender: ${nodeDatum.attributes.Gender}`}
+            </text>
+            <text
+                x="20"
+                y="240"
+                stroke="none"
+                fontFamily="'Jameel Noori Nastaleeq', cursive"
+                fill="black"
+            >
+                {`DOB: ${nodeDatum.attributes.DOB}`}
+            </text>
+            <text
+                x="20"
+                y="280"
+                fill="black"
+                stroke="none"
+                fontFamily="'Jameel Noori Nastaleeq', cursive"
+            >
+                {`Age: ${nodeDatum.attributes.Age}`}
+            </text>
+        </svg>
+    );
 }
+
 const FamilyTree = (props) => {
   const treeData = convertToTreeData(props.data[0]);
   let viewType = "vertical"; //"props.viewType";
