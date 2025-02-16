@@ -56,7 +56,7 @@ const ExcelReader = () => {
       const data = await response.arrayBuffer();
 
       const workbook = XLSX.read(data);
-      const sheetName = workbook.SheetNames[2];
+      const sheetName = workbook.SheetNames[1];
       const worksheet = workbook.Sheets[sheetName];
       const treeData = XLSX.utils.sheet_to_json(worksheet);
 
